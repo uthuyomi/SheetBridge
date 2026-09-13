@@ -1,0 +1,41 @@
+from datetime import datetime
+from typing import Any, Literal
+from uuid import UUID
+
+from pydantic import BaseModel
+
+OutputType = Literal[
+        "excel",
+        "google_sheets"
+]
+
+TemplateStatus = Literal[
+    "pending",
+    "analyzing",
+    "pending_confirmation",
+    "active",
+    "error"
+]
+
+class TemplateCreate(BaseModel):
+    name: str
+    file_path: str
+    output_type: OutputType = "excel"
+    
+
+class Template(BaseModel):
+    id: UUID
+    
+    name: str
+    file_path: str
+    
+    output_type: OutputType
+    status: TemplateStatus
+    
+    version: int
+    
+    definition: dict[str, Any] | None
+    
+    create_at: datetime
+    update_at: datetime
+    
