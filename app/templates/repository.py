@@ -48,3 +48,25 @@ class TemplateRepository:
         return Template.model_validate(
             response.data
         )
+        
+    def update_file_path(
+    self,
+    template_id: UUID,
+    file_path: str,
+    ) -> Template:
+        
+        response = (
+        supabase
+        .table("templates")
+        .update({
+            "file_path": file_path
+        })
+        .eq(
+            "id",
+            str(template_id),
+        )
+        .execute()
+    )
+        return Template.model_validate(
+            response.data[0]
+        )

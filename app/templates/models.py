@@ -19,7 +19,7 @@ TemplateStatus = Literal[
 
 class TemplateCreate(BaseModel):
     name: str
-    file_path: str
+    file_path: str | None = None
     output_type: OutputType = "excel"
     
 
@@ -27,7 +27,7 @@ class Template(BaseModel):
     id: UUID
     
     name: str
-    file_path: str
+    file_path: str | None = None
     
     output_type: OutputType
     status: TemplateStatus
