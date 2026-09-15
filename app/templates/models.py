@@ -36,6 +36,6 @@ class Template(BaseModel):
     
     definition: dict[str, Any] | None
     
-    create_at: datetime
-    update_at: datetime
+    created_at: datetime
+    updated_at: datetime
     

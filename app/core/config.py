@@ -6,9 +6,12 @@ load_dotenv()
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+SUPABASE_SECRET_KEY = os.getenv("SUPABASE_SECRET_KEY")
 
 if not SUPABASE_URL:
     raise RuntimeError("SUPABASE_URL is not set")
 if not SUPABASE_KEY:
     raise RuntimeError("SUPABASE_KEY is not set")
+if not SUPABASE_SECRET_KEY:
+    raise RuntimeError("SUPABASE_SECRET_KEY is not set")
 

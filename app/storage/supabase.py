@@ -33,3 +33,27 @@ class TemplateStorage:
             )
             
         return storage_path
+    
+    
+    def download_template(
+        self,
+        storage_path: str,
+        destination_path: str,
+    ) -> Path:
+        
+        file_data = (
+            supabase.storage
+            .from_(TEMPLATE_BUCKET)
+            .download(storage_path)
+        )
+        
+        destination = Path(destination_path)
+        
+        destination.parent.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+        
+        destination.write_bytes(file_data)
+        
+        return destination
