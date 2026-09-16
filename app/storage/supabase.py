@@ -57,3 +57,32 @@ class TemplateStorage:
         destination.write_bytes(file_data)
         
         return destination
+    
+    def upload_example(
+        self,
+        template_id: UUID,
+        example_id: UUID,
+        file_path: str,
+    ) -> str:
+        
+        source_path = Path(file_path)
+        
+        storage_path = Path(
+             f"{template_id}/examples/"
+             f"{example_id}{source_path.suffix}"
+        )
+        
+        with source_path.open("rb") as file:
+            supabase.storage.from_(
+                TEMPLATE_BUCKET
+            ).upload(
+                path=storage_path,
+                file=file,
+                file_options={
+                    "content-type":
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                },
+            )
+            
+        return storage_path
+    
